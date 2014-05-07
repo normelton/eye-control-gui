@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+require_relative "../lib/eye_control.rb"
+
+class EyeControl::ActorGroup < Celluloid::SupervisionGroup
+  supervise EyeControl::RedisManager, :as => :redis
+  supervise EyeControl::WebServer, :as => :web_server
+end
+
+EyeControl::ActorGroup.run

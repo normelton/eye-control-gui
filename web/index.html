@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Reel WebSockets time server example</title>
+  <style>
+    body {
+      font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+      font-weight: 300;
+      text-align: center;
+    }
+
+    #content {
+      width: 800px;
+      margin: 0 auto;
+      background: #EEEEEE;
+      padding: 1em;
+    }
+  </style>
+</head>
+<script>
+  var SocketKlass = "MozWebSocket" in window ? MozWebSocket : WebSocket;
+  var ws = new SocketKlass('ws://' + window.location.host + '/timeinfo');
+  ws.onmessage = function(msg){
+    document.getElementById('current-time').innerHTML = msg.data;
+  }
+</script>
+<body>
+  <div id="content">
+    <h1>Time Server Example</h1>
+    <div>The time is now: <span id="current-time">...</span></div>
+  </div>
+</body>
+</html>

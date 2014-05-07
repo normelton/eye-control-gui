@@ -1,0 +1,189 @@
+@import 'plugins';
+
+$green: green;
+$red: #ad0001;
+$orange: #ff9134;
+$grey: #a0a0a0;
+$white: #ffffff;
+
+body {
+	background-color: #ececec;
+	padding: 12px;
+	height: 100%;
+	font-family: 'Source Sans Pro', 'sans-serif';
+}
+
+body > div {
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 15px;
+	padding: 12px;
+	width: 900px;
+	background-color: white;
+	box-shadow: 1px 1px 4px 1px #ccc;
+}
+
+div.header {
+	span.title {
+		line-height: 60px;
+		font-size: 250%;
+		font-weight: 700;
+	}
+
+	span.connecting {
+		color: #817d84;
+		line-height: 60px;
+		float: right;
+
+		i {
+			margin-left: 10px;
+		}
+	}
+
+	&.connected span.connecting {
+		display: none;
+	}
+}
+
+div.actions {
+	a {
+		i {
+			margin-right: 8px;
+		}
+
+		color: white;
+		margin-left: 8px;
+		padding: 3px 10px;
+		border-radius: 4px;
+		font-size: 80%;
+		vertical-align: 1px;
+
+		&.start {
+			background-color: mix($green, $white, 75%);
+		}
+
+		&.stop {
+			background-color: mix($red, $white, 75%);
+		}
+
+		&.restart {
+			background-color: mix($orange, $white, 75%);
+		}
+
+		cursor: pointer;
+	}
+
+	&.disabled a {
+		&.start {
+			background-color: mix($green, $white, 20%);
+		}
+
+		&.stop {
+			background-color: mix($red, $white, 20%);
+		}
+
+		&.restart {
+			background-color: mix($orange, $white, 20%);
+		}
+
+		cursor: auto !important;
+	}
+}
+
+div.host {
+	p.name {
+		line-height: 32px;
+		background-image: url("../images/server.png");
+		background-repeat: no-repeat;
+		background-position: top left;
+		padding-left: 40px;
+		padding-bottom: 10px;
+		margin-bottom: 10px;
+		font-size: 125%;
+		vertical-align: bottom;
+		border-bottom: 1px solid #d0d0d0;
+	}
+
+	div.group {
+		margin-top: 10px;
+	}
+
+	ul.topology {
+		cursor: pointer;
+		padding: 0px;
+		margin: 0px;
+		font-size: 90%;
+		color: #a9a9a9;
+
+		li {
+			display: inline;
+			list-style-type: none;
+			font-style: italic;
+			font-weight: 300;
+
+			&:not(:first-child):before {
+				font-family: FontAwesome;
+				font-size: 80%;
+				font-style: normal;
+				color: #dcdcdc;
+				content: "\f101";
+				padding-left: 10px;
+				padding-right: 10px;
+			}
+		}
+	}
+
+	label.process {
+		@include clearfix;
+		
+		display: block;
+		margin-left: 10px;
+		color: #696969;
+		cursor: pointer;
+
+		> input {
+			margin-right: 10px;
+			font-size: 80%;
+			vertical-align: 2px;
+		}
+
+		i.status {
+			font-style: normal;
+			margin-right: 10px;
+			font-size: 70%;
+			vertical-align: 2px;
+
+			&.green {
+				color: $green;
+			}
+
+			&.red {
+				color: $red;
+			}
+
+			&.orange {
+				color: $orange;
+			}
+		}
+
+		span.caption {
+			float: right;
+			font-size: 80%;
+			color: #cacaca;
+		}
+	}
+
+	label.process + ul.topology {
+		margin-top: 8px;
+	}
+}
+
+p {
+	margin: 0px 0px 0px 0px;
+}
+
+hr {
+	border: none;
+	height: 1px;
+	background-color: #b0b0b0;
+}
