@@ -45,7 +45,26 @@ div.header {
 	}
 }
 
+div.dummy {
+	visibility: hidden;
+
+	&:after {
+		content: ".";
+	}
+
+	&.hidden {
+		display: none;
+	}
+}
+
 div.actions {
+	&.floating {
+		position: fixed;
+		left: 50%;
+		margin-left: -462px;
+		top: 10px;
+	}
+
 	a {
 		i {
 			margin-right: 8px;
@@ -87,6 +106,16 @@ div.actions {
 		}
 
 		cursor: auto !important;
+	}
+
+	span.count {
+		font-size: 80%;
+		margin-left: 20px;
+		color: $grey;
+	}
+
+	&.disabled span.count {
+		display: none;
 	}
 }
 

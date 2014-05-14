@@ -12,7 +12,7 @@ $(document).ready =>
       App.websocket = new WebSocket("ws://" + window.location.host)
 
       # console.log "Using bogus websocket servername, fix this!"
-      # App.websocket = new WebSocket("ws://localhost:1234")
+      # App.websocket = new WebSocket("ws://localhost:8080")
 
       App.websocket.onmessage = App.Functions.onMessage
 
@@ -28,13 +28,22 @@ $(document).ready =>
       $("div.actions").on("click", "a.start", App.Functions.startProcess)
       $("div.actions").on("click", "a.stop", App.Functions.stopProcess)
       $("div.actions").on("click", "a.restart", App.Functions.restartProcess)
+      $(window).bind("scroll", App.Functions.scroll)
       $("body").on("click", "ul.topology", App.Functions.toggleGroup)
 
+    scroll: (evt) =>
+      $("div.actions").toggleClass("floating", $(window).scrollTop() > 101)
+      $("div.dummy").toggleClass("hidden", $(window).scrollTop() <= 101)
+
     toggleProcess: (evt) =>
-      if $("label.process input:checked").length > 0
+      process_count = $("label.process input:checked").length
+
+      if process_count > 0
         $("div.actions").removeClass("disabled")
       else
         $("div.actions").addClass("disabled")
+
+      $("div.actions span.count").text("#{process_count} selected process#{if process_count > 1 then 'es' else ''}")
 
     toggleGroup: (evt) =>
       el_checkboxes = $(evt.currentTarget).closest("div.group").find("input[type='checkbox']")

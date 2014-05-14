@@ -9,7 +9,8 @@
           return App.Functions.initCallbacks();
         },
         initWebSocket: function() {
-          App.websocket = new WebSocket("ws://" + window.location.host);
+          console.log("Using bogus websocket servername, fix this!");
+          App.websocket = new WebSocket("ws://localhost:8080");
           App.websocket.onmessage = App.Functions.onMessage;
           App.websocket.onopen = function() {
             return $("div.header").addClass("connected");
@@ -26,14 +27,22 @@
           $("div.actions").on("click", "a.start", App.Functions.startProcess);
           $("div.actions").on("click", "a.stop", App.Functions.stopProcess);
           $("div.actions").on("click", "a.restart", App.Functions.restartProcess);
+          $(window).bind("scroll", App.Functions.scroll);
           return $("body").on("click", "ul.topology", App.Functions.toggleGroup);
         },
+        scroll: function(evt) {
+          $("div.actions").toggleClass("floating", $(window).scrollTop() > 101);
+          return $("div.dummy").toggleClass("hidden", $(window).scrollTop() <= 101);
+        },
         toggleProcess: function(evt) {
-          if ($("label.process input:checked").length > 0) {
-            return $("div.actions").removeClass("disabled");
+          var process_count;
+          process_count = $("label.process input:checked").length;
+          if (process_count > 0) {
+            $("div.actions").removeClass("disabled");
           } else {
-            return $("div.actions").addClass("disabled");
+            $("div.actions").addClass("disabled");
           }
+          return $("div.actions span.count").text("" + process_count + " selected process" + (process_count > 1 ? 'es' : ''));
         },
         toggleGroup: function(evt) {
           var el_checkboxes;
