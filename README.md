@@ -1,30 +1,13 @@
-Eye Control
+Eye Control GUI
 ===
 
 A GUI for monitoring servers running [Eye](http://github.com/kostya/eye).
 
-![Screenshot](https://raw.github.com/normelton/eye-control/master/web/src/images/screenshot.png)
-
+![Screenshot](https://raw.github.com/normelton/eye-control-gui/master/web/src/images/screenshot.png)
 
 ### Eye Configuration
 
-Each Eye server will report its state to a centralized [Redis](http://redis.io) Redis server. This must be configured on each Eye server:
-
-```ruby
-Eye.config do
-  logger '/tmp/eye.log'
-  control_server '192.168.1.5'
-end
-```
-
-By default, the Eye process will also respond to start / stop / restart requests coming from Eye Control. This can be disabled by running in read-only mode:
-
-```ruby
-Eye.config do
-  logger '/tmp/eye.log'
-  control_server '192.168.1.5', :mode => :readonly
-end
-```
+A plugin gem, located at http://github.com/normelton/eye-control, must be loaded and configured in your Eye configuration file.
 
 ### Eye Control Server
 
